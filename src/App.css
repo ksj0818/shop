@@ -21,3 +21,12 @@
 .Jumbotron > h1 {
   font-size: var(--font-title);
 }
+
+.text-deco {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.55);
+}
+.text-deco:hover {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.75);
+}

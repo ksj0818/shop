@@ -3,6 +3,7 @@ import "./App.css";
 import React, { useState } from "react";
 import Data from "./js/data";
 import Test from "./js/Test";
+import Detail from "./js/Detail";
 import Jumbotron from "./js/Jumbotron";
 import { Link, Route, Switch } from "react-router-dom";
 import {
@@ -13,7 +14,6 @@ import {
   Form,
   FormControl,
   Container,
-  Card,
 } from "react-bootstrap";
 function App() {
   let [shoes, setShoes] = useState(Data);
@@ -21,7 +21,11 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Shoes Shop</Navbar.Brand>
+          <Navbar.Brand>
+            <Link className="text-deco" to="/">
+              Shoes Shop
+            </Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -29,9 +33,13 @@ function App() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="#action1">About</Nav.Link>
-              <Nav.Link href="#action2">Woman</Nav.Link>
-              <Nav.Link href="#">man</Nav.Link>
+              <Nav.Link>
+                <Link className="text-deco" to="/detail">
+                  About
+                </Link>
+              </Nav.Link>
+              <Nav.Link>Woman</Nav.Link>
+              <Nav.Link>man</Nav.Link>
               <NavDropdown title="Link" id="navbarScrollingDropdown">
                 <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action4">
@@ -55,19 +63,26 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* 메인페이지 */}
-      <Route exact path="/">
-        <Jumbotron data={shoes}></Jumbotron>
-      </Route>
-      {/* 상세페이지 */}
-      <Route path="/detail">
-        <div>상세페이지</div>
-      </Route>
-      {/* 테스트페이지 */}
-      <Route path="/test">
-        <Test title="컴포넌트" />
-      </Route>
-      {/* <Route exact path="/test" component={Test}></Route> */}
+
+      {/* Switch 중복 매칭을 허용하지 않음 */}
+      <Switch>
+        {/* 메인페이지 */}
+        <Route exact path="/">
+          <Jumbotron data={shoes}></Jumbotron>
+        </Route>
+        {/* 상세페이지 */}
+        <Route path="/detail">
+          <Detail data={shoes} />
+        </Route>
+        {/* 테스트페이지 */}
+        <Route path="/test">
+          <Test title="컴포넌트" />
+        </Route>
+        {/* <Route exact path="/test" component={Test}></Route> */}
+        <Route path="/:id">
+          <div>아무거나 보여주세요</div>
+        </Route>
+      </Switch>
     </div>
   );
 }

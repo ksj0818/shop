@@ -2,16 +2,15 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 function Product(props) {
+  let id = props.data.id;
+  id >= props.data.length ? (id = 0) : null;
+
   return (
     <div className="col-md-4">
       <Card style={{ width: "18rem" }}>
         <Card.Img
           variant="top"
-          src={
-            "https://codingapple1.github.io/shop/shoes" +
-            props.data.id++ +
-            ".jpg"
-          }
+          src={"https://codingapple1.github.io/shop/shoes" + ++id + ".jpg"}
         />
         <Card.Body>
           <Card.Title>{props.data.title}</Card.Title>
