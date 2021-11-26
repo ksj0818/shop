@@ -1,2 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@200&family=Karla:ital,wght@0,200;0,400;1,200&display=swap");
+
+:root {
+  --font-title: 55px;
+}
+
 .App {
+  font-family: "Karla", sans-serif;
+}
+
+.Jumbotron {
+  background-image: url("./img/background.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  text-align: center;
+  color: white;
+  padding-top: 50px;
+}
+
+.Jumbotron > h1 {
+  font-size: var(--font-title);
 }
