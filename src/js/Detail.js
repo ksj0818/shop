@@ -1,6 +1,7 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 function Detail(props) {
+  let { id } = useParams(); // 사용자가 입력한 URL파라미터들 담겨있음
   let history = useHistory();
   return (
     <div className="container">
@@ -8,13 +9,14 @@ function Detail(props) {
         <div className="col-md-6">
           <img
             src="https://codingapple1.github.io/shop/shoes1.jpg"
+            alt="img"
             width="100%"
           />
         </div>
         <div className="col-md-6 mt-4">
-          <h4 className="pt-5">{props.data[0].title}</h4>
-          <p>{props.data[0].content}</p>
-          <p>{props.data[0].price}</p>
+          <h4 className="pt-5">{props.data[id].title}</h4>
+          <p>{props.data[id].content}</p>
+          <p>{props.data[id].price}</p>
           <button className="btn btn-danger">주문하기</button>
           <button
             className="btn btn-danger"

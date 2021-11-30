@@ -9,6 +9,7 @@ function Product(props) {
     <div className="col-md-4">
       <Card style={{ width: "18rem" }}>
         <Card.Img
+          data-id={props.data.id}
           variant="top"
           src={"https://codingapple1.github.io/shop/shoes" + ++id + ".jpg"}
         />

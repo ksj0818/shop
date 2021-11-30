@@ -34,7 +34,7 @@ function App() {
               navbarScroll
             >
               <Nav.Link>
-                <Link className="text-deco" to="/detail">
+                <Link className="text-deco" to="/detail/0">
                   About
                 </Link>
               </Nav.Link>
@@ -71,7 +71,7 @@ function App() {
           <Jumbotron data={shoes}></Jumbotron>
         </Route>
         {/* 상세페이지 */}
-        <Route path="/detail">
+        <Route path="/detail/:id">
           <Detail data={shoes} />
         </Route>
         {/* 테스트페이지 */}
@@ -79,9 +79,6 @@ function App() {
           <Test title="컴포넌트" />
         </Route>
         {/* <Route exact path="/test" component={Test}></Route> */}
-        <Route path="/:id">
-          <div>아무거나 보여주세요</div>
-        </Route>
       </Switch>
     </div>
   );
