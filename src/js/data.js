@@ -5,7 +5,6 @@ export default [
     title: "White and Black",
     content: "Born in France",
     price: "$120",
-    url: "https://codingapple1.github.io/shop/shoes1.jpg",
   },
 
   {
@@ -13,7 +12,6 @@ export default [
     title: "Red Knit",
     content: "Born in Seoul",
     price: "$110",
-    url: "https://codingapple1.github.io/shop/shoes2.jpg",
   },
 
   {
@@ -21,6 +19,5 @@ export default [
     title: "Grey Yordan",
     content: "Born in the States",
     price: "$130",
-    url: "https://codingapple1.github.io/shop/shoes3.jpg",
   },
 ];
