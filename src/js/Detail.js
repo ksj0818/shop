@@ -1,9 +1,10 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 function Detail(props) {
-  let { id } = useParams();
+  let { id } = useParams(); // 사용자가 입력한 URL파라미터들 담겨있음
+  let history = useHistory();
   let index = id;
   index++;
 
@@ -24,6 +25,15 @@ function Detail(props) {
         </Card>
         <Button variant="danger">구매하기</Button>
       </section>
+      <Button
+        onClick={() => {
+          // history.goBack(); // 이전 페이지로 이동
+          history.push("/"); // push()를 이용해서 이동 가능
+        }}
+        variant="secondary"
+      >
+        뒤로가기
+      </Button>
     </div>
   );
 }
