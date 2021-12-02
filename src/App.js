@@ -14,16 +14,19 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+import axios from "axios";
 
+let temp = [];
 function App() {
   let [shoes, setShoes] = useState(Data);
-
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container fluid>
           <Navbar.Brand>
-            <Link to="/">Small Shop</Link>
+            <Link className="text-deco" to="/">
+              Small Shop
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
@@ -32,10 +35,10 @@ function App() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Link className="base-left" to="/woman">
+              <Link className="text-deco base-left" to="/woman">
                 Woman
               </Link>
-              <Link className="base-left" to="/man">
+              <Link className="text-deco base-left" to="/man">
                 man
               </Link>
             </Nav>
@@ -66,6 +69,29 @@ function App() {
           <Detail data={shoes} />
         </Route>
       </Switch>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          axios
+            .get("https://codingapple1.github.io/shop/data2.json")
+            .then((result) => {
+              if (temp.includes(result)) {
+                return;
+              }
+              temp = [...shoes];
+              let result1 = result.data;
+              result1.map((r) => {
+                temp.push(r);
+              });
+              setShoes(temp);
+            })
+            .catch(() => {
+              console.log("실패");
+            });
+        }}
+      >
+        더보기
+      </button>
     </div>
   );
 }

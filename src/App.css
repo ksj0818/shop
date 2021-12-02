@@ -50,3 +50,16 @@
 .point {
   cursor: pointer;
 }
+
+.detail-alert {
+  width: 29.2%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: burlywood;
+}
+
+.hidden {
+  display: none;
+}
