@@ -19,6 +19,8 @@ import axios from "axios";
 let temp = [];
 function App() {
   let [shoes, setShoes] = useState(Data);
+  let [stock, setStock] = useState([10, 11, 12]);
+
   return (
     <div className="App">
       <Navbar bg="light" expand="lg">
@@ -62,36 +64,34 @@ function App() {
           <Jumbotron />
           {/* Content */}
           <Content data={shoes} />
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              // ajax 요청
+              axios
+                .get("https://codingapple1.github.io/shop/data2.json")
+                .then((result) => {
+                  temp = [...shoes];
+                  let result1 = result.data;
+                  result1.map((r) => {
+                    temp.push(r);
+                  });
+                  setShoes(temp);
+                })
+                .catch(() => {
+                  console.log("실패");
+                });
+            }}
+          >
+            더보기
+          </button>
         </Route>
 
         {/* Detail Page */}
         <Route path="/detail/:id">
-          <Detail data={shoes} />
+          <Detail data={shoes} stock={stock} />
         </Route>
       </Switch>
-      <button
-        className="btn btn-primary"
-        onClick={() => {
-          axios
-            .get("https://codingapple1.github.io/shop/data2.json")
-            .then((result) => {
-              if (temp.includes(result)) {
-                return;
-              }
-              temp = [...shoes];
-              let result1 = result.data;
-              result1.map((r) => {
-                temp.push(r);
-              });
-              setShoes(temp);
-            })
-            .catch(() => {
-              console.log("실패");
-            });
-        }}
-      >
-        더보기
-      </button>
     </div>
   );
 }

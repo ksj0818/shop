@@ -11,7 +11,7 @@ function Content(props) {
           props.data.map((s) => {
             let id = s.id;
             return (
-              <Col key={s.id}>
+              <Col className="base-top col-4" key={s.id}>
                 <Card style={{ width: "18rem" }}>
                   <Link to={"/detail/" + id}>
                     <Card.Img

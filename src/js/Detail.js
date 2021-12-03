@@ -7,8 +7,8 @@ import "../App.css";
 function Detail(props) {
   let [alert1, setAlert] = useState(true);
   let [input1, setinput] = useState();
-  let { id } = useParams(); // 사용자가 입력한 URL파라미터들 담겨있음
   let history = useHistory();
+  let { id } = useParams(); // 사용자가 입력한 URL파라미터들 담겨있음
   let index = id;
   index++;
 
@@ -55,9 +55,12 @@ function Detail(props) {
             <Card.Title>{props.data[id].title}</Card.Title>
             <Card.Text>{props.data[id].content}</Card.Text>
             <Card.Text>{props.data[id].price}</Card.Text>
+            <Info stock={props.stock}></Info>
           </Card.Body>
         </Card>
-        <Button variant="danger">구매하기</Button>
+        <Button variant="danger" onClick={() => {}}>
+          구매하기
+        </Button>
       </section>
       <Button
         onClick={() => {
@@ -70,6 +73,12 @@ function Detail(props) {
       </Button>
     </div>
   );
+}
+
+function Info(props) {
+  let { id } = useParams(); // 사용자가 입력한 URL파라미터들 담겨있음
+
+  return <p>재고 : {props.stock[id]}</p>;
 }
 
 export default Detail;
