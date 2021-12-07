@@ -15,8 +15,11 @@ import {
   Button,
 } from "react-bootstrap";
 import axios from "axios";
+import Cart from "./js/Cart";
 
+export let stockContext = React.createContext();
 let temp = [];
+
 function App() {
   let [shoes, setShoes] = useState(Data);
   let [stock, setStock] = useState([10, 11, 12]);
@@ -63,7 +66,9 @@ function App() {
           {/* Jumbotron */}
           <Jumbotron />
           {/* Content */}
-          <Content data={shoes} />
+          <stockContext.Provider value={stock}>
+            <Content data={shoes} />
+          </stockContext.Provider>
           <button
             className="btn btn-primary"
             onClick={() => {
@@ -86,10 +91,15 @@ function App() {
             더보기
           </button>
         </Route>
-
         {/* Detail Page */}
         <Route path="/detail/:id">
-          <Detail data={shoes} stock={stock} />
+          <stockContext.Provider value={stock}>
+            <Detail data={shoes} stock={stock} setStock={setStock} />
+          </stockContext.Provider>
+        </Route>
+        {/* Cart */}
+        <Route path="/cart">
+          <Cart />
         </Route>
       </Switch>
     </div>

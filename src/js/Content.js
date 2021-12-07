@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Button, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { stockContext } from "../App";
 
 function Content(props) {
+  let stock = useContext(stockContext);
   return (
     <Container>
       <Row className="center">
@@ -28,6 +30,7 @@ function Content(props) {
                     <Card.Title>{s.title}</Card.Title>
                     <Card.Text>{s.content}</Card.Text>
                     <Card.Text>{s.price}</Card.Text>
+                    <p>재고: {stock[--id]}</p>
                     <Button variant="primary">Buy</Button>
                   </Card.Body>
                 </Card>
