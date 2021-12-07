@@ -1,23 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { Card, Button } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Card, Button, Nav } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
-
+import { stockContext } from "../App";
+import { CSSTransition } from "react-transition-group";
 import "../App.css";
 
 function Detail(props) {
+  let stock = useContext(stockContext);
   let [alert1, setAlert] = useState(true);
   let [input1, setinput] = useState();
   let history = useHistory();
   let { id } = useParams(); // 사용자가 입력한 URL파라미터들 담겨있음
   let index = id;
   index++;
+  let [tap, setTap] = useState(0);
+  let [inSwitch, setInSwitch] = useState(false);
 
   useEffect(() => {
     let s = setTimeout(() => {
       // 2초 뒤 클래스이름 hidden으로 변경
       // let d = document.getElementById("detail-alert");
       // d.className = "hidden";
-
       // state를 false로 변경
       setAlert(false);
     }, 3000);
@@ -55,10 +58,16 @@ function Detail(props) {
             <Card.Title>{props.data[id].title}</Card.Title>
             <Card.Text>{props.data[id].content}</Card.Text>
             <Card.Text>{props.data[id].price}</Card.Text>
-            <Info stock={props.stock}></Info>
+            <Info stock={stock}></Info>
           </Card.Body>
         </Card>
-        <Button variant="danger" onClick={() => {}}>
+        <Button
+          variant="danger"
+          onClick={() => {
+            // 구매하기 버튼 클릭 시 재고 -1
+            props.setStock([9, 11, 12]);
+          }}
+        >
           구매하기
         </Button>
       </section>
@@ -71,13 +80,53 @@ function Detail(props) {
       >
         뒤로가기
       </Button>
+      <Nav variant="tabs" defaultActiveKey="link-0">
+        <Nav.Item>
+          <Nav.Link>상품설명</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link-0"
+            onClick={() => {
+              setInSwitch(false);
+              setTap(0);
+            }}
+          >
+            상세내용
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
+            eventKey="link-1"
+            onClick={() => {
+              setInSwitch(false);
+              setTap(1);
+            }}
+          >
+            배송정보
+          </Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <CSSTransition in={inSwitch} classNames="wow" timeout={2000}>
+        <TapContent data={tap} switch={setInSwitch} />
+      </CSSTransition>
     </div>
   );
 }
 
+function TapContent(props) {
+  useEffect(() => {
+    props.switch(true);
+  });
+  if (props.data === 0) {
+    return <div>1번째 데이터</div>;
+  } else if (props.data === 1) {
+    return <div>2번째 데이터</div>;
+  }
+}
+
 function Info(props) {
   let { id } = useParams(); // 사용자가 입력한 URL파라미터들 담겨있음
-
   return <p>재고 : {props.stock[id]}</p>;
 }
 
