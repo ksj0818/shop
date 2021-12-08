@@ -77,3 +77,10 @@
   opacity: 1;
   transition: all 2000ms;
 }
+
+.cart-ui {
+  background-color: bisque;
+  text-align: center;
+  font-size: 25px;
+  padding: 10px;
+}
